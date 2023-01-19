@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Smoke" verbose="1" >
-    <test name="Creating new account test" >
-        <classes>
-            <class name="com.IFNTUNG.edu.tests.CreateAccountTest"/>
-        </classes>
-    </test>
-</suite>

@@ -6,17 +6,15 @@ public class StringUtils {
     private static final String ALFANUMERICAL_ALL_CAPS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static Random random = new Random();
 
-    public static String getRandomString(int stringLength)
-    {
+    public static String getRandomString(int stringLength) {
         StringBuilder stringBuilder = new StringBuilder(stringLength);
-        for (int i = 0; i < stringLength; i++)
-        {
+        for (int i = 0; i < stringLength; i++) {
             stringBuilder.append(ALFANUMERICAL_ALL_CAPS.charAt(random.nextInt(ALFANUMERICAL_ALL_CAPS.length())));
         }
         return stringBuilder.toString();
     }
 
-    public static String generateRandomEmail(int fixLength){
+    public static String generateRandomEmail(int fixLength) {
         return getRandomString(fixLength).concat("@gmail.com");
     }
 }
