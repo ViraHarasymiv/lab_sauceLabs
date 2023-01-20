@@ -134,5 +134,13 @@ public class BasePage {
     protected List<WebElement> findAll(By locator) {
         return driver.findElements(locator);
     }
+
+    /**
+     * Wait for alert present and then switch to it
+     */
+    protected Alert switchToAlert() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert();
+    }
 }
 

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="radioButtonTestSuite" verbose="1">
+
+    <test name="RadioButtonTest-chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="com.IFNTUNG.edu.tests.radioButtonsTest.RadioButtonTest">
+            </class>
+        </classes>
+    </test>
+</suite>

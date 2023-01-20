@@ -1,6 +1,4 @@
 package com.IFNTUNG.edu.runners;
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +7,6 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
-
-@Listeners({com.IFNTUNG.edu.utils.TestListener.class})
 public class BaseTest {
     protected WebDriver driver;
     protected Logger log;

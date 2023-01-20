@@ -145,11 +145,27 @@ public class CreateAccountPage extends BasePage {
     }
 
     /**
-     * Submit entered user's information
+     * Submit entered user's information with valid data
      */
-    public AccountSuccessPage submitEnteredInformation() {
+    public AccountSuccessPage submitEnteredInformationWithValidDate() {
         click(submitButton);
         return new AccountSuccessPage(driver, log);
+    }
+
+    /**
+     * Submit entered user's information with invalid data
+     */
+    public CreateAccountPage submitEnteredInformationWithInValidDate() {
+        click(submitButton);
+        return this;
+    }
+
+    /** Switch to alert and get it's message */
+    public String getAlertText() {
+        Alert alert = switchToAlert();
+        String alertText = alert.getText();
+        log.info("Alert says: " + alertText);
+        return alertText;
     }
 
 }

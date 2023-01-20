@@ -8,10 +8,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.List;
-
+/**
+ * This class contains user's automated steps for creating the new account with the valid data.
+ *
+ * @author Vira Harasymiv
+ */
 public class PositiveCreateAccountTest extends BaseTest {
-    private static final String EXPECTED_MESSAGE = "Your Account Has Been Created";
     private static final String EXPECTED_URL = ConfigReader.get().getAccountSuccessPageUrl();
 
     @Parameters({"firstName", "lastName", "birthDay", "fixLength", "company", "streetAddress", "postCode", "city", "state", "country", "telephoneNumber", "password", "message"})
@@ -19,7 +21,7 @@ public class PositiveCreateAccountTest extends BaseTest {
     public void createNewAccountTest(String firstName, String lastName, String birthDay,
                                      int fixLength, String company, String streetAddress, String postCode, String city,
                                      String state, String country, String telephoneNumber, String password, String message) {
-        log.info("Starting Create Account Test");
+        log.info("Starting Create Account Test with valid data");
         AccountSuccessPage accountSuccessPage = new HomePage(driver, log)
                 .openPage()
                 .getHeaderComponent()
@@ -36,12 +38,12 @@ public class PositiveCreateAccountTest extends BaseTest {
                 .enterTelephoneNumber(telephoneNumber)
                 .checkNewsLetterCheckBox()
                 .createPassword(password)
-                .submitEnteredInformation();
+                .submitEnteredInformationWithValidDate();
        String actualMessage = accountSuccessPage.getActualMessage(message);
        String actualUrl = accountSuccessPage.getCurrentUrl();
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(actualMessage.contains(EXPECTED_MESSAGE));
+        softAssert.assertTrue(actualMessage.contains(message));
         softAssert.assertTrue(actualUrl.contains(EXPECTED_URL));
         softAssert.assertAll();
     }
