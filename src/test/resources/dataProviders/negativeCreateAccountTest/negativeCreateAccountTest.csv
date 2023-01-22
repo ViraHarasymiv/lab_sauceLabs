@@ -1,6 +1,0 @@
-number,firstName,lastName,birthDay,fixLength,company,streetAddress,postCode,city,state,country,telephoneNumber,password,message,description
-1,!,Test User Last Name,07/30/1988,8,Test User Company,Test User street,12300,User City,User state,Ukraine,380661234590,123456789,Your First Name must contain a minimum of 2 characters,test with incorrect username
-2,firstName,,07/30/1988,8,Test User Company,Test User street,12300,User City,User state,Ukraine,380661234590,123456789,Your Last Name must contain a minimum of 2 characters,test with incorrect lastname
-3,firstName,Test User Last Name,07/30/1988,8,Test User Company,,12300,User City,User state,Ukraine,380661234590,123456789,Your Street Address must contain a minimum of 5 characters,test with incorrect street address
-4,firstName,Test User Last Name,07/30/1988,8,Test User Company,Test User street,!,User City,User state,Ukraine,380661234590,123456789,Your Post Code must contain a minimum of 4 characters,test with incorrect post code
-5,firstName,Test User Last Name,07/30/1988,8,Test User Company,Test User street,12300,,User state,Ukraine,380661234590,123456789,Your City must contain a minimum of 3 characters,test with incorrect city

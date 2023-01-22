@@ -1,38 +1,44 @@
-# Lab 1: Page Object Model & TestNG
-The project is made by using Page Object Model and TestNG framework. Log4j is used for logging events. All logs are saved in the directory named logs (target/logs/appTest.log).
-
-Selenium's source code is made available under the Apache 2.0 license.
+# Lab 1: Page Object Model & TestNG & Selenium Grid 4.0
+The project is made by using Page Object Model, TestNG framework and Selenium Grid 4.0. 
 
 The target website is [BPB PUBLICATIONS](http://practice.bpbonline.com/index.php).
 
-- The "DataProvider" annotation is used in order to pass multiple parameters to the Creating New Account test with invalid data. Using DataProviders, we can easily pass multiple values to a test in just one execution cycle.
-- The "Parameter" annotation is used in order to pass multiple parameters to the Creating New Account test with valid data
+Automated tests: positive test case for the creating new account
 
-Automated tests (for chrome and opera browsers):
-1. Positive test for the creating new account
-2. Negative test for the creating new account
-3. Test for checking the radio buttons' functionality
+## Run tests in Selenium Grid 4.0
 
-## Executing the Tests
+**1. Configure Selenium Grid 4.0**
 
-- Clone the repository:
+- Download selenium-server jar-file ([Selenium Downloads](https://www.selenium.dev/downloads/))
+- Rename the jar-file in "selenium-server" on order to make easier to run the cmd commands
+- Run the next command in cmd (where the "selenium-server" jar-file is saved) in order to run EVENT BUS. It is the communication channel between all the other components.
 ```shell
-git clone https://github.com/ViraHarasymiv/laboratorna_8.git
+java -jar selenium-server.jar event-bus
 ```
-- Run all tests:
+- Run the next command in the separate cmd window (where the "selenium-server" jar-file is saved) in order to run SESSION MAP. It maps the relationship between a given node and the session in which it’s running.
+```shell
+java -jar selenium-server.jar sessions
+```
+- Run the next command in the separate cmd window (where the "selenium-server" jar-file is saved) in order to run NEW SESSION QUEUE. It’s the queue where requests for new sessions wait until they get picked by the distributor.
+```shell
+java -jar selenium-server.jar sessionqueue
+```
+- Run the next command in the separate cmd window (where the "selenium-server" jar-file is saved) in order to run DISTRIBUTOR. It registers and manages the nodes. It also queries the new session queue for requests for new sessions, then finds a suitable node for it.
+```shell
+java -jar selenium-server.jar distributor --sessions http://localhost:5556 --sessionqueue http://localhost:5559 --bind-bus false
+```
+- Run the next command in the separate cmd window (where the "selenium-server" jar-file is saved) in order to run ROUTER. It is the component that receives the requests and dispatches them to the appropriate place: requests for an existing session are sent to the session map, where the id for the node is retrieved and then the request is sent to the node; requests for a new session are sent to the new session queue, where they wait to be picked up
+```shell
+java -jar selenium-server.jar router --sessions http://localhost:5556 --distributor http://localhost:5553 --sessionqueue http://localhost:5559
+```
+- Run the next command in the separate cmd window (where the "selenium-server" jar-file is saved) in order to run NODE. Nodes are the “agents” that run on the given machines. Six separate cmd windows are opened: Event Bus, Session Map, New Session Queue, Distributor, Router and Node.
+```shell
+java -jar selenium-server.jar node --detect-drivers true
+```
+**2. Run test case in Selenium Grid 4.0**
+- GridFactory class is used to initialize RemoteWebDriver in Selenium Grid 4.0
+- "Parameter" annotation is used in BaseTest class in order to select the environment (local or grid) and the browser type.
+- positiveCreateAccountTestSuiteOnGrid.xml is used to run the tests in Selenium Grid. You can also use the next command:
 ```shell
 mvn clean test
 ```
-- run the positive test for the creating new account:
-```shell
-mvn -Dtest=PositiveCreateAccountTest#createNewAccountTest test
-```
-- run the negative test for the creating new account:
-```shell
-mvn -Dtest=NegativeCreateAccountTest#negativeCreateAccountTest test
-```
-- run test for checking the radio buttons' functionality:
-```shell
-mvn -Dtest=RadioButtonTest#checkRadioButtons test
-```
-

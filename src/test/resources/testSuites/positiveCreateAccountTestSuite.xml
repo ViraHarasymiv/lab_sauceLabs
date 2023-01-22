@@ -1,14 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="negativeLoginTestSuite" verbose="1">
-
-    <test name="NegativeLoginTest-chrome">
-        <parameter name="browser" value="chrome"></parameter>
-        <classes>
-            <class name="com.IFNTUNG.edu.tests.createAccountTests.NegativeCreateAccountTest">
-            </class>
-        </classes>
-    </test>
+<suite name="PositiveCreateAccountTest" verbose="1">
+    <parameter name="environment" value="local" />
 
     <test name="PositiveCreateAccountTest-chrome">
         <parameter name="firstName" value="Test User First Name"></parameter>
@@ -24,17 +17,8 @@
         <parameter name="telephoneNumber" value="380661234590"></parameter>
         <parameter name="password" value="123456789"></parameter>
         <parameter name="message" value="Your Account Has Been Created"></parameter>
-        <parameter name="browser" value="chrome"></parameter>
         <classes>
             <class name="com.IFNTUNG.edu.tests.createAccountTests.PositiveCreateAccountTest"/>
-        </classes>
-    </test>
-
-    <test name="RadioButtonTest-chrome">
-        <parameter name="browser" value="chrome"></parameter>
-        <classes>
-            <class name="com.IFNTUNG.edu.tests.radioButtonsTest.RadioButtonTest">
-            </class>
         </classes>
     </test>
 

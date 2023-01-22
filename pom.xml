@@ -16,7 +16,7 @@
         <log4j>2.19.0</log4j>
         <opencsv>5.7.1</opencsv>
         <maven-surefire-plugin>2.22.0</maven-surefire-plugin>
-        <testng.xml>allTests.xml</testng.xml>
+        <testng.xml>PositiveCreateAccountTestSuiteOnGrid.xml</testng.xml>
         <commons-io>2.11.0</commons-io>
     </properties>
 
