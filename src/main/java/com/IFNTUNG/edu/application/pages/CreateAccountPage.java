@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CreateAccountPage extends BasePage {
     private By radioButton = CreateAccountPageLocators.RADIO_BUTTON.getPath();
+    private By maleRadioButton = CreateAccountPageLocators.MALE_RADIO_BUTTON.getPath();
     private By firstNameField = CreateAccountPageLocators.FIRST_NAME_FIELD.getPath();
     private By lastNameField = CreateAccountPageLocators.LAST_NAME_FIELD.getPath();
     private By dataPicker = CreateAccountPageLocators.DATAPICKER.getPath();
@@ -38,6 +39,15 @@ public class CreateAccountPage extends BasePage {
         List<WebElement> radioButtons = findAll(radioButton);
         radioButtons.stream().findFirst().get().click();
         return this;
+    }
+
+    /**
+     * Click on the Male radio button
+     */
+    public CreateAccountPage clickMaleRadioButton() {
+    log.info("Click the Male radio button");
+    click(maleRadioButton);
+    return this;
     }
 
     /**
@@ -77,8 +87,8 @@ public class CreateAccountPage extends BasePage {
     /**
      * Type the user's email
      */
-    public CreateAccountPage enterUserEmail(int fix_length) {
-        String email = StringUtils.generateRandomEmail(fix_length);
+    public CreateAccountPage enterUserEmail(String fix_length) {
+        String email = StringUtils.generateRandomEmail(Integer.parseInt(fix_length));
         type(email, emailField);
         return this;
     }

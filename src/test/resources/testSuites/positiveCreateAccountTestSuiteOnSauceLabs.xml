@@ -1,0 +1,39 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="PositiveCreateAccountTestSuite">
+    <parameter name="environment" value="sauce" />
+
+    <test name="PositiveCreateAccountTest-chrome">
+        <parameter name="browser" value="chrome" />
+        <parameter name="platform" value="Windows 10" />
+        <classes>
+            <class name="com.IFNTUNG.edu.tests.createAccountTests.PositiveCreateAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="PositiveCreateAccountTest-firefox">
+        <parameter name="browser" value="firefox" />
+        <parameter name="platform" value="Windows 8" />
+        <classes>
+            <class name="com.IFNTUNG.edu.tests.createAccountTests.PositiveCreateAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="PositiveCreateAccountTest-MicrosoftEdge">
+        <parameter name="browser" value="MicrosoftEdge" />
+        <parameter name="platform" value="Windows 11" />
+        <classes>
+            <class name="com.IFNTUNG.edu.tests.createAccountTests.PositiveCreateAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="PositiveCreateAccountTest-safari">
+        <parameter name="browser" value="safari" />
+        <parameter name="platform" value="macOS 12" />
+        <classes>
+            <class name="com.IFNTUNG.edu.tests.createAccountTests.PositiveCreateAccountTest"/>
+        </classes>
+    </test>
+
+</suite>
+

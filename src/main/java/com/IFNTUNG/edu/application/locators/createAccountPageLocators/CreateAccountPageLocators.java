@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public enum CreateAccountPageLocators {
     RADIO_BUTTON(By.xpath("//input[@type='radio']")),
+    MALE_RADIO_BUTTON(By.xpath("//input[@value='m']")),
     FIRST_NAME_FIELD(By.xpath("//input[@name='firstname']")),
     LAST_NAME_FIELD(By.xpath("//input[@name='lastname']")),
     DATAPICKER(By.xpath("//input[@class='hasDatepicker']")),

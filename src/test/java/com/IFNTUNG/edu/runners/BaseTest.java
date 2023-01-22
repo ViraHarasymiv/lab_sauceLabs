@@ -11,15 +11,19 @@ public class BaseTest {
     protected WebDriver driver;
     protected Logger log;
 
-    @Parameters({ "browser", "environment" })
+    @Parameters({ "browser", "environment", "platform"})
     @BeforeMethod(alwaysRun = true)
-    public void setUp(Method method, @Optional("chrome") String browser, @Optional("local") String environment, ITestContext ctx) {
+    public void setUp(Method method, @Optional("chrome") String browser, @Optional("local") String environment,  @Optional("Windows 10") String platform, ITestContext ctx) {
         log = LogManager.getLogger(ctx.getCurrentXmlTest().getSuite().getName());
 
         switch (environment) {
 
             case "grid":
                 driver = new GridFactory(browser, log).createDriver();
+                break;
+
+            case "sauce":
+                driver = new SauceLabsFactory(browser, platform, log).createDriver();
                 break;
 
             default:
