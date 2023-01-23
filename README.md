@@ -8,13 +8,13 @@ Automated test sample: positive test case for the creating new account. It is ru
 
 ## To run tests on SauceLabs you should:
 
-**1. Create the new account in [SAUCELABS](https://saucelabs.com/) in order to try it free**
+1. Create the new account in [SAUCELABS](https://saucelabs.com/) in order to try it free
 
-**2. Create RemoteWebDriver using the DesiredCapabilities class to set browserName, browserVersion,platformName in the SauceLabsFactory class. [PLATFORM CONFIGURATOR](https://saucelabs.com/platform/platform-configurator#/) is used to choose the appropriate browser name and the platform name**
+2. Create RemoteWebDriver using the DesiredCapabilities class to set browserName, browserVersion,platformName in the **SauceLabsFactory class**. [PLATFORM CONFIGURATOR](https://saucelabs.com/platform/platform-configurator#/) is used to choose the appropriate browser name and the platform name
 
-**3. Add the "sauce" environment to the BaseTest class and create a new object of the SauceLabsFactory class**
+3. Add the "sauce" environment to the **BaseTest class** and create a new object of the SauceLabsFactory class
 
-**4. Create testNG.xml file with browser and platform parameters.**
+4. Create testNG.xml file with browser and platform parameters.
 
-**5. See your results in the "Test Results" section.**
+5. See your results in the **"Test Results"** section.
 
