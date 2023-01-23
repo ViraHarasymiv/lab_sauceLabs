@@ -1,5 +1,8 @@
 package com.IFNTUNG.edu.runners;
 
+import com.IFNTUNG.edu.utils.SauceLabsDataReader;
+import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,20 +15,23 @@ import java.util.Map;
 import java.util.logging.Level;
 
 
-public class SauceLabsFactory {
+public class SauceLabsFactory implements SauceOnDemandAuthenticationProvider {
     private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private String browser;
     private String platform;
+    private String sauceTestName;
     private Logger log;
+    private ThreadLocal<String>sessionId = new ThreadLocal<>();
 
-    public SauceLabsFactory(String browser, Logger log) {
-        this.browser = browser.toLowerCase();
-        this.log = log;
-    }
+    private static String USER_NAME = SauceLabsDataReader.get().getSauceLabsUserName();
+    private static String ACCESS_KEY = SauceLabsDataReader.get().getSauceLabsAccessKey();
 
-    public SauceLabsFactory(String browser, String platform, Logger log) {
+    private static final SauceOnDemandAuthentication AUTHENTICATION = new SauceOnDemandAuthentication(USER_NAME, ACCESS_KEY);
+
+    public SauceLabsFactory(String browser, String platform, Logger log, String sauceTestName) {
         this.browser = browser.toLowerCase();
         this.platform = platform;
+        this.sauceTestName = sauceTestName;
         this.log = log;
     }
 
@@ -41,17 +47,29 @@ public class SauceLabsFactory {
         } else{
             sauceOptions.put("screenResolution", "1920x1440");
         }
+
+        sauceOptions.put("name",sauceTestName);
         capabilities.setCapability("sauce:options", sauceOptions);
 
         URL url = null;
         try {
-            url = new URL("https://oauth-vira.harasymiv-5fe59:06579d23-fed1-4e51-84da-bb2151536b7c@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+            url = new URL("https://" + AUTHENTICATION.getUsername()
+                    + ":" + AUTHENTICATION.getAccessKey() + "@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         driver.set(new RemoteWebDriver(url, capabilities));
+        sessionId.set( ((RemoteWebDriver)driver.get()).getSessionId().toString());
 
         java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
         return driver.get();
+    }
+
+    @Override
+    public SauceOnDemandAuthentication getAuthentication() {
+        return AUTHENTICATION;
+    }
+    public String getSessionId(){
+        return sessionId.get();
     }
 }
